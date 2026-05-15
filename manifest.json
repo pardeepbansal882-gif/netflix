@@ -1,6 +1,6 @@
 {
-  "name": "Netflix Romance",
-  "short_name": "Netflix",
+  "name": "Our Love Story",
+  "short_name": "Our Story",
   "description": "A cinematic journey through our love story.",
   "start_url": "./login.html",
   "scope": ".",
