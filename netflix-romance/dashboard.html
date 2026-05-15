@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Netflix</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="auth.js"></script>
+</head>
+<body class="dashboard-body">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">Netflix</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#memories">Memories</a></li>
+                <li><a href="#trips">Trips Together</a></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="profiles.html"><img src="assets/profile_1.png" alt="Profile" class="nav-profile"></a>
+            <div class="hamburger" id="hamburgerMenu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Left Sidebar -->
+    <aside class="left-sidebar">
+        <div class="sidebar-top">
+            <a href="#" class="sidebar-item search-item">
+                <i class="fas fa-search"></i>
+            </a>
+            <a href="profiles.html" class="sidebar-profile">
+                <img src="assets/profile_1.png" alt="Profile" class="nav-profile">
+            </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#moments" class="sidebar-item">
+                <i class="fas fa-heart"></i>
+            </a>
+            <a href="#customize-notes" class="sidebar-item">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" id="myListBtnSidebar" class="sidebar-item">
+                <i class="fas fa-plus"></i>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="#" onclick="logoutUser()" class="sidebar-item logout-item">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <span class="close-sidebar" id="closeSidebar">&times;</span>
+        <ul class="sidebar-links">
+            <li><a href="#" class="sidebar-link">Home</a></li>
+            <li><a href="#memories" class="sidebar-link">Memories</a></li>
+            <li><a href="#trips" class="sidebar-link">Trips Together</a></li>
+            <li><a href="#moments" class="sidebar-link">Special Moments</a></li>
+            <li><a href="#customize-notes" class="sidebar-link">Season Note</a></li>
+            <li><a href="#" id="myListBtnMobile" class="sidebar-link">My List <span id="myListCountMobile" class="badge-inline">0</span></a></li>
+            <li><a href="#" onclick="logoutUser()" class="sidebar-link" style="color: var(--netflix-red);">Sign Out</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <!-- To use your own banner video, place 'banner_video.mp4' in the assets folder! -->
+        <!-- If the video isn't there, it will smoothly fall back to the hero_banner.png image. -->
+        <video class="hero-bg-video" src="assets/banner_video.mp4" autoplay loop muted playsinline></video>
+        
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Our Journey ❤️</h1>
+            <p class="hero-desc">Every moment with you is like a beautiful movie. Relive our favorite memories, trips, and the little things that make our story special.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-play"><i class="fas fa-play"></i> Play</button>
+                <button class="btn btn-info"><i class="fas fa-info-circle"></i> More Info</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Rows -->
+    <main class="main-content">
+        <!-- Row 1 -->
+        <section class="row" id="memories">
+            <h2 class="row-title">Our Memories</h2>
+            <div class="row-posters">
+                <div class="row-poster-container">
+                    <!-- Replace card_beach.png and the video src below with your own files! -->
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Row 2 -->
+        <section class="row" id="moments">
+            <h2 class="row-title">Special Moments</h2>
+            <div class="row-posters">
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Row 3 -->
+        <section class="row" id="trips">
+            <h2 class="row-title">Trips Together</h2>
+            <div class="row-posters">
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Row 4 -->
+        <section class="row">
+            <h2 class="row-title">Favorite Days</h2>
+            <div class="row-posters">
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_dinner.png" alt="Dinner" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_beach.png" alt="Beach" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_city.png" alt="City" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+                <div class="row-poster-container">
+                    <img src="assets/card_forest.png" alt="Forest" class="row-poster">
+                    <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" class="row-video" muted loop preload="none"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Row 5 (Coming Soon) -->
+        <section class="row" id="comingSoonRow" style="display: none;">
+            <h2 class="row-title">Season 5: Our Future ✨</h2>
+            <div class="row-posters">
+                <div class="row-poster-container coming-soon">
+                    <img src="assets/hero_banner.png" alt="Coming Soon" class="row-poster blurred" loading="lazy">
+                    <div class="coming-soon-text">Building our home together... 🏠❤️</div>
+                </div>
+                <div class="row-poster-container coming-soon">
+                    <img src="assets/card_dinner.png" alt="Coming Soon" class="row-poster blurred" loading="lazy">
+                    <div class="coming-soon-text">More late night talks... 🌙✨</div>
+                </div>
+                <div class="row-poster-container coming-soon">
+                    <img src="assets/card_city.png" alt="Coming Soon" class="row-poster blurred" loading="lazy">
+                    <div class="coming-soon-text">Next trip: To your heart! ✈️💖</div>
+                </div>
+                <div class="row-poster-container coming-soon">
+                    <img src="assets/card_beach.png" alt="Coming Soon" class="row-poster blurred" loading="lazy">
+                    <div class="coming-soon-text">Endless love stories... 📖💍</div>
+                </div>
+                <div class="row-poster-container coming-soon">
+                    <img src="assets/card_forest.png" alt="Coming Soon" class="row-poster blurred" loading="lazy">
+                    <div class="coming-soon-text">Counting days with you... ⏳💝</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dedicated Season Message Section -->
+        <section class="row" id="customize-notes" style="margin-top: 4rem; padding-bottom: 2rem; padding-right: 4%;">
+            <h2 class="row-title" id="seasonNoteTitle">Special Message for Season 1</h2>
+            <p style="color: var(--grey-text); margin-bottom: 15px; font-size: 1rem;">Click below to read your exclusive cinematic love letter embedded with floating hearts and background music.</p>
+            
+            <div class="active-season-note-card" style="display: flex; flex-direction: column; align-items: flex-start; gap: 15px;">
+                <button id="openCinematicNoteBtn" class="btn btn-play" style="background-color: var(--netflix-red); color: white; border: none; font-size: 1.1rem; padding: 12px 28px; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);"><i class="fas fa-envelope-open-text"></i> Open Season Love Letter ❤️</button>
+                <!-- Hidden storage/display paragraph to keep script variables synced seamlessly -->
+                <p id="activeSeasonNoteDisplay" class="season-note-text" style="display: none;">Loading message...</p>
+            </div>
+        </section>
+
+        <!-- Sealed Vault Section (Visible only on Season 4) -->
+        <section class="row" id="sealedVaultSection" style="display: none; margin-top: 5rem; padding-bottom: 4rem;">
+            <h2 class="row-title" style="color: #fff; font-size: 1.8rem; margin-bottom: 5px;">Sealed Letters for the Future 💌</h2>
+            <p style="color: var(--grey-text); margin-bottom: 35px; font-size: 1rem;">Exclusive letters sealed with love. Click an envelope to break the golden seal and slide out your message.</p>
+            
+            <div class="envelopes-grid" style="display: flex; gap: 40px; flex-wrap: wrap; justify-content: flex-start; padding-top: 10px;">
+                <!-- Envelope 1 -->
+                <div class="sealed-envelope-card" id="envMissMe">
+                    <div class="envelope-wrapper">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body"></div>
+                        <div class="envelope-front"></div>
+                        <div class="seal-heart">❤️</div>
+                        <div class="envelope-label">Open when you miss me...</div>
+                        <div class="letter-paper">
+                            <p class="letter-text">"Whenever you feel far away, place your hand over your heart. I am always right there with you, loving you more than words can ever say. You are my forever home. ❤️"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Envelope 2 -->
+                <div class="sealed-envelope-card" id="envHardDay">
+                    <div class="envelope-wrapper">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body"></div>
+                        <div class="envelope-front"></div>
+                        <div class="seal-heart">❤️</div>
+                        <div class="envelope-label">Open when you have a hard day...</div>
+                        <div class="letter-paper">
+                            <p class="letter-text">"Take a deep breath, my beautiful love. You are the strongest, most incredible person I know. Whatever is stressing you out will pass, but my admiration for you is infinite. ✨"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <video id="mainFeatureVideo" src="assets/main_feature.mp4" controls preload="none"></video>
+        </div>
+    </div>
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-image-modal close-modal">&times;</span>
+        <div class="modal-content image-modal-content">
+            <div class="image-wrapper">
+                <img id="modalImage" src="" alt="Expanded Image">
+            </div>
+        </div>
+    </div>
+    <!-- My List Modal -->
+    <div id="myListModal" class="modal">
+        <div class="modal-content list-modal-content">
+            <span class="close-list-modal close-modal">&times;</span>
+            <h2 style="color: white; margin-bottom: 20px;">My Favorites</h2>
+            <div id="myListGrid" class="list-grid">
+                <!-- Liked images will be injected here -->
+                <p class="empty-list-msg">Your list is empty. Click the hearts on pictures to add them here!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dedicated Cinematic Season Note Popup Modal -->
+    <div id="seasonNoteModal" class="profile-note-modal">
+        <div class="profile-note-box" id="seasonNoteBox">
+            <img id="seasonNoteAvatar" src="assets/profile_1.png" alt="Season Avatar" class="note-modal-avatar">
+            <h2 id="seasonNotePopupTitle" class="note-modal-title">Season Special Message ❤️</h2>
+            <p id="seasonNotePopupText" class="note-modal-text">Loading message...</p>
+            <button id="closeSeasonNoteModalBtn" class="note-modal-btn" style="background-color: #222; color: white; border: 1px solid rgba(255,255,255,0.2);">Close Love Letter 💖</button>
+        </div>
+    </div>
+    <audio id="seasonNoteMusicPlayer" preload="auto"></audio>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Netflix Romance</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#E50914">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/login_bg.png');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .login-header {
+            position: absolute;
+            top: 25px;
+            left: 3%;
+        }
+
+        .login-logo {
+            height: 45px;
+        }
+
+        .login-card {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 60px 68px 40px;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        .login-card h1 {
+            margin: 0 0 28px;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: #333;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            background: #454545;
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+
+        .login-help {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            color: #b3b3b3;
+            font-size: 13px;
+        }
+
+        .signup-now {
+            margin-top: 50px;
+            color: #737373;
+            font-size: 16px;
+        }
+
+        .signup-now a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .otp-section {
+            display: none;
+        }
+
+        .error-message {
+            color: #e87c03;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="login-logo">
+    </div>
+
+    <div class="login-card">
+        <h1>Sign In</h1>
+        
+        <div id="phoneSection">
+            <div class="form-group">
+                <input type="email" id="phoneNumber" class="form-input" placeholder="Email or phone number">
+                <div id="phoneError" class="error-message">Please enter a valid phone number.</div>
+            </div>
+            <button id="sendOtpBtn" class="btn-login">Send OTP</button>
+            <div class="login-help">
+                <label><input type="checkbox" checked> Remember me</label>
+                <a href="#">Need help?</a>
+            </div>
+        </div>
+
+        <div id="otpSection" class="otp-section">
+            <div class="form-group">
+                <input type="text" id="otpCode" class="form-input" placeholder="Enter 6-digit OTP" maxlength="6">
+                <div id="otpError" class="error-message">Invalid OTP. Please try again.</div>
+            </div>
+            <button id="verifyOtpBtn" class="btn-login">Verify & Sign In</button>
+        </div>
+
+        <div class="signup-now">
+            New to Netflix Romance? <a href="#">Sign up now.</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        (function() {
+            // REAL OTP CONFIGURATION
+            const EMAILJS_SERVICE_ID = "service_4pvrdea";
+            const EMAILJS_TEMPLATE_ID = "template_e3nc9e8";
+            const EMAILJS_PUBLIC_KEY = "JcpkpbIIuNaCoIbSu";
+
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+
+            const phoneSection = document.getElementById('phoneSection');
+            const otpSection = document.getElementById('otpSection');
+            const phoneNumberInput = document.getElementById('phoneNumber');
+            const otpInput = document.getElementById('otpCode');
+            const phoneError = document.getElementById('phoneError');
+            const otpError = document.getElementById('otpError');
+            const sendOtpBtn = document.getElementById('sendOtpBtn');
+
+            let generatedOtp = null;
+
+            sendOtpBtn.addEventListener('click', () => {
+                const identifier = phoneNumberInput.value.trim();
+                if (identifier.length < 5) {
+                    phoneError.textContent = "Please enter a valid email or phone.";
+                    phoneError.style.display = 'block';
+                    return;
+                }
+
+                sendOtpBtn.textContent = "Sending...";
+                sendOtpBtn.disabled = true;
+
+                // Generate 6-digit OTP
+                generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                
+                // Send via EmailJS (matching your template variables)
+                const templateParams = {
+                    to_name: identifier,
+                    passcode: generatedOtp,
+                    email: identifier 
+                };
+
+                // Passing Public Key directly in the send call for robustness
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+                    .then(() => {
+                        phoneError.style.display = 'none';
+                        phoneSection.style.display = 'none';
+                        otpSection.style.display = 'block';
+                        console.log('Real OTP Sent Successfully!');
+                    }, (error) => {
+                        console.error('EmailJS Error:', error);
+                        const errorMsg = error.text || error.message || "Unknown Error";
+                        phoneError.textContent = "Error: " + errorMsg;
+                        phoneError.style.display = 'block';
+                        sendOtpBtn.textContent = "Send OTP";
+                        sendOtpBtn.disabled = false;
+                    });
+            });
+
+            document.getElementById('verifyOtpBtn').addEventListener('click', () => {
+                const enteredOtp = otpInput.value.trim();
+                if (enteredOtp === generatedOtp) {
+                    window.loginUser();
+                } else {
+                    otpError.style.display = 'block';
+                }
+            });
+        })();
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Failed', err));
+            });
+        }
+    </script>
+</body>
+</html>

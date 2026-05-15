@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's Watching? - Netflix</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
+</head>
+
+<body class="profiles-body">
+    <h1 class="profiles-title">Who's watching?</h1>
+    <div class="profiles-container">
+        <a href="dashboard.html?year=1" class="profile-card">
+            <img src="assets/profile_1.png" alt="1st Year" class="profile-img">
+            <span class="profile-name">1st Year ❤️</span>
+        </a>
+        <a href="dashboard.html?year=2" class="profile-card">
+            <img src="assets/profile_2.png" alt="2nd Year" class="profile-img">
+            <span class="profile-name">2nd Year ❤️</span>
+        </a>
+        <a href="dashboard.html?year=3" class="profile-card">
+            <img src="assets/profile_3.png" alt="3rd Year" class="profile-img">
+            <span class="profile-name">3rd Year ❤️</span>
+        </a>
+        <a href="dashboard.html?year=4" class="profile-card">
+            <img src="assets/profile_4.png" alt="4th Year" class="profile-img">
+            <span class="profile-name">4th Year ❤️</span>
+        </a>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        let isNavigating = false; // Prevent double clicks
+
+        document.querySelectorAll('.profile-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isNavigating) return;
+                isNavigating = true;
+
+                const href = card.getAttribute('href');
+
+                // Fade out the title immediately
+                document.querySelector('.profiles-title').style.opacity = '0';
+                document.querySelector('.profiles-title').style.transition = 'opacity 0.3s ease';
+
+                // Fade out all other profile cards
+                document.querySelectorAll('.profile-card').forEach(c => {
+                    if (c !== card) {
+                        c.style.opacity = '0';
+                        c.style.transition = 'opacity 0.3s ease';
+                    }
+                });
+
+                // Cinematic Zoom Effect: Scale the clicked profile massively towards the camera
+                card.style.transform = 'scale(6)';
+                card.style.opacity = '0'; // Fades to black as it zooms
+                card.style.zIndex = '9999';
+                card.style.pointerEvents = 'none';
+                card.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+                // Navigate exactly as the zoom finishes
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>

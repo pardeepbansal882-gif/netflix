@@ -1,0 +1,30 @@
+1. 👤 Profile Pictures (profile_1.png, etc.)
+Aspect Ratio: 1:1 (Perfect Square)
+Best Dimensions: 500 x 500 pixels (or 400 x 400 px)
+Why: Your CSS forces them into a 150x150px circle/square. 
+Uploading a 500x500px image ensures it looks super sharp even on high-resolution Retina displays 
+(like iPhones and MacBooks).
+
+
+2. 🌆 Hero Banner (hero_banner.png / banner_video.mp4)
+Aspect Ratio: 16:9 (Standard Widescreen)
+Best Dimensions: 1920 x 1080 pixels (Full HD)
+Why: This is the massive background image/video at the top of the dashboard. 
+It needs to look cinematic. If you want it to load slightly faster on slower connections,
+you can compress it to 1280 x 720 pixels (720p).
+
+
+3. 📸 Row Posters (The Memory & Trip Cards)
+Aspect Ratio: 16:9 (Standard Widescreen)
+Best Dimensions: 1280 x 720 pixels (720p HD)
+Why: On the dashboard itself, these cards shrink down to 260 x 146 px. 
+However, because you have the Full-Screen Image Modal feature (when you click a picture, it opens up huge), 
+you must use high-quality images like 1280x720. The browser will automatically scale them down for the row, 
+but they will look stunning when your partner clicks to expand them!
+
+
+Quick Tip for Videos 🎬
+If you are adding hover videos (hover_video_1.mp4), keep them short (3-5 seconds) and export them at 720p (1280x720) 
+or even lower like 480p (854x480). Since they only play inside the small 260x146px box on hover, 
+making the video files smaller will ensure the dashboard loads instantly without lagging.
+
